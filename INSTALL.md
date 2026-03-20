@@ -11,6 +11,34 @@ Next, clone this repository by opening a terminal and typing the following comma
 
 If you do not want to install git, you can instead download [main.zip](https://github.com/ageron/handson-ml3/archive/main.zip), unzip it, rename the resulting directory to `handson-ml3` and move it to your development directory.
 
+## Port project to use `uv` (macOS flavor)
+
+```shell
+brew install uv
+```
+Then, make project initialization:
+
+```shell
+uv init
+uv python pin 3.11
+uv add --dev ipykernel
+```
+to build `box2d-py` dependency, you need to fix C paths and flags:
+
+```shell
+brew install swig
+sudo xcode-select --switch /Library/Developer/CommandLineTools
+export SDKROOT=$(xcrun --show-sdk-path)
+export CPATH="$SDKROOT/usr/include"
+export CPLUS_INCLUDE_PATH="$SDKROOT/usr/include/c++/v1:$SDKROOT/usr/include"
+export CXXFLAGS="-I$SDKROOT/usr/include/c++/v1 -I$SDKROOT/usr/include"
+```
+And the final step is to install project dependencies:
+
+```shell
+uv add -r requirements.txt
+```
+
 ## Install Anaconda
 Next, you will need Python 3 and a bunch of Python libraries. The simplest way to install these is to [download and install Anaconda](https://www.anaconda.com/distribution/), which is a great cross-platform Python distribution for scientific computing. It comes bundled with many scientific libraries, including NumPy, Pandas, Matplotlib, Scikit-Learn and much more, so it's quite a large installation. If you prefer a lighter weight Anaconda distribution, you can [install Miniconda](https://docs.conda.io/en/latest/miniconda.html), which contains the bare minimum to run the `conda` packaging tool. You should install the latest version of Anaconda (or Miniconda) available.
 

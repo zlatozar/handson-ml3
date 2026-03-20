@@ -1,3 +1,7 @@
+#
+# Look at the dependencies: section in the .yml file. If you see something that isn't a Python package (like ffmpeg or graphviz),
+# you need to install those manually using `brew install <name>` on your Mac so your uv environment can use them.
+#
 name: homl3
 channels:
   - conda-forge
