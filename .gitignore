@@ -5,7 +5,7 @@
 *.pyc
 .DS_Store
 .ipynb_checkpoints/
-.vscode/
+
 checkpoint
 /logs
 /tf_logs
@@ -15,3 +15,7 @@ my_*
 /person.desc
 /person_pb2.py
 /datasets
+
+# IDE
+.vscode/
+.idea
