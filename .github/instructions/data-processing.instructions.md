@@ -1,6 +1,9 @@
 
 ---
-# Data Processing Guidelines
+name: "Data Processing Guidelines"
+description: "Guidelines for data loading, preprocessing, augmentation, and validation."
+applyTo: "src/**/data/**/*.py"
+---
 
 This document provides specific guidelines for Python files located in the `data/` directory, focusing on data loading, preprocessing, augmentation, and validation. These instructions aim to ensure data integrity, reproducibility, and efficient handling of various data types within the Machine Learning project.
 

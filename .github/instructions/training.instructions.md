@@ -1,6 +1,9 @@
 
 ---
-# Training Script Guidelines
+name: "Training Script Guidelines"
+description: "Guidelines for implementing training loops, evaluation, and related utilities."
+applyTo: "src/**/training/**/*.py"
+---
 
 This document provides specific guidelines for Python files located in the `training/` directory, focusing on the implementation of training loops, evaluation procedures, and related utilities. These instructions aim to ensure robust, reproducible, and efficient training of Machine Learning models using PyTorch.
 

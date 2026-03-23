@@ -1,6 +1,9 @@
 
 ---
-# Configuration File Guidelines
+name: "Configuration File Guidelines"
+description: "Guidelines for configuration files, primarily in YAML format."
+applyTo: "src/**/configs/**/*.yaml"
+---
 
 This document provides specific guidelines for configuration files located in the `configs/` directory, primarily focusing on YAML format. These instructions aim to ensure consistency, readability, and maintainability of all project configurations, facilitating reproducibility and easy experimentation.
 

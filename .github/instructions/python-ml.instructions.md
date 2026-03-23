@@ -1,6 +1,9 @@
 
 ---
-# Python ML Coding Guidelines
+name: "Python ML Coding Guidelines"
+description: "General Python coding standards for Machine Learning projects."
+applyTo: "**/*.py"
+---
 
 This document provides specific coding guidelines for general Python files within the Machine Learning project, particularly those not covered by more specific path-based instructions. These guidelines build upon the global instructions and emphasize best practices for Python development in an ML context.
 

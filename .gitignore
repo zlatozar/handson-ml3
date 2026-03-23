@@ -1,8 +1,12 @@
+# Extentions
+my_*
 *.bak
 *.bak.*
 *.ckpt
 *.old
 *.pyc
+
+# Folders
 .DS_Store
 .ipynb_checkpoints/
 
@@ -10,7 +14,6 @@ checkpoint
 /logs
 /tf_logs
 /images
-my_*
 /person.proto
 /person.desc
 /person_pb2.py

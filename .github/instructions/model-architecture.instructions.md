@@ -1,6 +1,9 @@
 
 ---
-# Model Architecture Guidelines
+name: "Model Architecture Guidelines"
+description: "Guidelines for defining and implementing neural network architectures."
+applyTo: "src/**/models/**/*.py"
+---
 
 This document provides specific guidelines for Python files located in the `models/` directory, focusing on defining and implementing neural network architectures using PyTorch. These instructions aim to promote modularity, readability, and efficient design of machine learning models.
 
