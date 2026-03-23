@@ -1,7 +1,8 @@
 [project]
 name = "handson-ml3"
 version = "0.1.0"
-description = "Add your description here"
+description = "Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow 3rd Edition"
+authors = [{ name = "Aurélien Géron" }]
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
