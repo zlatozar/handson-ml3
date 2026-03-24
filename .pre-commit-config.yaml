@@ -1,0 +1,9 @@
+# Force the use of 'uv' for all hooks
+default_install_hook_types: [pre-commit]
+default_stages: [pre-commit]
+
+repos:
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.9.1
+    hooks:
+      - id: nbstripout

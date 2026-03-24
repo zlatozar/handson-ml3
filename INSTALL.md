@@ -11,7 +11,7 @@ Next, clone this repository by opening a terminal and typing the following comma
 
 If you do not want to install git, you can instead download [main.zip](https://github.com/ageron/handson-ml3/archive/main.zip), unzip it, rename the resulting directory to `handson-ml3` and move it to your development directory.
 
-## Port project to use `uv` (macOS flavor)
+## How to port project to use `uv` (macOS flavor)
 
 ```shell
 brew install uv
@@ -38,6 +38,12 @@ And the final step is to install project dependencies:
 ```shell
 uv add -r requirements.txt
 ```
+
+## Use 'uv' to manage project dependencies
+
+1. Install [uv](https://github.com/astral-sh/uv).
+2. Sync dependencies: `uv sync`
+3. Install git hooks: `uv run pre-commit install`
 
 ## Install Anaconda
 Next, you will need Python 3 and a bunch of Python libraries. The simplest way to install these is to [download and install Anaconda](https://www.anaconda.com/distribution/), which is a great cross-platform Python distribution for scientific computing. It comes bundled with many scientific libraries, including NumPy, Pandas, Matplotlib, Scikit-Learn and much more, so it's quite a large installation. If you prefer a lighter weight Anaconda distribution, you can [install Miniconda](https://docs.conda.io/en/latest/miniconda.html), which contains the bare minimum to run the `conda` packaging tool. You should install the latest version of Anaconda (or Miniconda) available.
