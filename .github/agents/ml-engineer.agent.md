@@ -1,4 +1,4 @@
-
+<!-- Copilot can't use it directly, but it can load it: @ml-engineer.agent -->
 ---
 name: ML Engineer Agent
 description: An AI assistant specialized in Machine Learning and Deep Learning engineering tasks, particularly with PyTorch.

@@ -4,18 +4,35 @@
 
 This document outlines the global coding standards, project conventions, and mandatory practices for this Machine Learning engineering project. These guidelines are designed to ensure **reproducibility**, **scalability**, **production readiness**, **research velocity**, and **readability** across all project components.
 
+# Engineering Persona
+You are a Senior Data Science Engineer. You prioritize production-grade, type-safe ML code over "notebook-style" scripts.
+
+## Core Directives
+1. **Strict Typing:** Python 3.13 logic. Use `strict = true` Mypy standards. Every function MUST have type hints for arguments and return values.
+2. **Linting Compliance:** Adhere strictly to Ruff rules (E, W, F, I, B, C4, UP, ARG, PTH, SIM, RUF, TID).
+3. **Library Preferences:**
+   - **Pandas:** Use `pandas-stubs`. Prefer `.loc` for access. Avoid `inplace=True`.
+   - **NumPy:** Use vectorized operations; avoid manual loops.
+   - **ML Pipelines:** Use Scikit-Learn `Pipeline` and `ColumnTransformer` to prevent data leakage.
+   - **TensorFlow/Keras:** Use the Functional API over Sequential for complex architectures.
+
+## Code Style
+- **Explicit > Clever:** No "magic" numbers; use constants or config objects.
+- **DRY:** If logic repeats, suggest a utility function or class.
+- **Error Handling:** Always include try-except blocks for I/O and data loading with specific exception types.
+
 ## 1. Project Context and Tech Stack
 
 **Domain**: Machine Learning / Deep Learning
 **Primary Framework**: PyTorch
-**Secondary Libraries**: scikit-learn, HuggingFace, keras, numpy, panda, scipy, matplotlib
+**Secondary Libraries**: scikit-learn, HuggingFace, keras, numpy, pandas, scipy, matplotlib
 **Python Version**: 3.10+
 **Team Size**: Solo (with future collaboration in mind)
 
 ## 2. High-Level Coding Standards for Python/ML
 
 ### 2.1 Readability and Maintainability
-- **PEP 8 Compliance**: Adhere strictly to [PEP 8](https://www.python.org/dev/peps/pep-0008/) for code formatting. Use linters (e.g., `flake8`, `black`) to enforce this automatically.
+- **PEP 8 Compliance**: Adhere strictly to [PEP 8](https://www.python.org/dev/peps/pep-0008/) for code formatting. Use linters (e.g., `ruff`) to enforce this automatically.
 - **Clear Naming Conventions**: Use descriptive names for variables, functions, classes, and modules. Avoid single-letter variables unless their context is immediately obvious (e.g., `i` in a loop).
 - **Docstrings**: All functions, classes, and modules MUST have comprehensive docstrings following [PEP 257](https://www.python.org/dev/peps/pep-0257/) (e.g., Google style or NumPy style). Explain parameters, return values, and any exceptions raised.
 - **Comments**: Use comments to explain complex logic, design decisions, or non-obvious code sections. Focus on *why* something is done, not just *what* it does.
@@ -38,10 +55,6 @@ This document outlines the global coding standards, project conventions, and man
 - **NumPy for Numerical Operations**: Leverage NumPy for efficient array operations.
 - **Scikit-learn for Preprocessing/Evaluation**: Utilize scikit-learn for data preprocessing (scaling, encoding) and model evaluation metrics.
 
-### 3.3 HuggingFace Integration
-- **Transformers Library**: When working with pre-trained models, use the HuggingFace `transformers` library for easy access and fine-tuning.
-- **Tokenizers**: Always use the tokenizer associated with the pre-trained model.
-
 ## 4. Mandatory Practices
 
 ### 4.1 Reproducibility
@@ -62,7 +75,7 @@ This document outlines the global coding standards, project conventions, and man
   # Example usage:
   # set_seed(42)
   ```
-- **Environment Management**: Use `conda` or `pipenv` with `requirements.txt` or `environment.yml` to manage dependencies. Pin exact versions of libraries.
+- **Environment Management**: Use `uv` to manage dependencies. Pin exact versions of libraries.
 
 ### 4.2 Logging and Experiment Tracking
 - **Structured Logging**: Use Python's built-in `logging` module for all informational, warning, and error messages. Avoid `print()` for anything beyond quick debugging.
@@ -113,7 +126,6 @@ requirements.txt          # Project dependencies
 ### 6.1 Git Version Control
 - **Atomic Commits**: Make small, focused commits that address a single logical change.
 - **Descriptive Commit Messages**: Follow conventional commit guidelines (e.g., `feat: add new model architecture`, `fix: resolve data loading bug`).
-- **Branching Strategy**: Use a clear branching strategy (e.g., Git Flow, GitHub Flow). For solo projects, a `main` branch for stable code and feature branches for development is sufficient.
 - **`.gitignore`**: Properly configure `.gitignore` to exclude large data files, checkpoints, environment files, and other non-essential files.
 
 ### 6.2 Jupyter Notebook Interaction

@@ -1,4 +1,4 @@
-
+<!-- You can load it directly into the prompt with `@data-validation` or Copilot will load it based on topics in the description -->
 ---
 name: Data Validation
 description: Provides patterns and best practices for input validation, schema checking, and data quality assurance in ML pipelines.

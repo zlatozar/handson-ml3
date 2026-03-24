@@ -1,4 +1,4 @@
-
+<!-- You can load it directly into the prompt with `@pytorch-tensorflow-training` or Copilot will load it based on topics in the description -->
 ---
 name: PyTorch/TensorFlow Training
 description: Provides standard training loop patterns with progress bars, checkpointing, and experiment logging for PyTorch and TensorFlow.
