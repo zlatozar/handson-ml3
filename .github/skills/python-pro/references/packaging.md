@@ -34,7 +34,7 @@ name = "myproject"
 version = "0.1.0"
 description = "A Python project"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.13"
 license = {text = "MIT"}
 authors = [
     {name = "Your Name", email = "you@example.com"}
@@ -44,8 +44,8 @@ classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Typing :: Typed",
 ]
 
@@ -59,7 +59,6 @@ dev = [
     "pytest>=7.4.0",
     "pytest-cov>=4.1.0",
     "mypy>=1.7.0",
-    "black>=23.11.0",
     "ruff>=0.1.6",
 ]
 docs = [
@@ -77,30 +76,31 @@ Repository = "https://github.com/username/myproject"
 Changelog = "https://github.com/username/myproject/blob/main/CHANGELOG.md"
 
 # Tool configurations
-[tool.black]
-line-length = 100
-target-version = ["py311"]
-include = '\.pyi?$'
-
 [tool.ruff]
 line-length = 100
-target-version = "py311"
-select = [
-    "E",   # pycodestyle errors
-    "W",   # pycodestyle warnings
-    "F",   # pyflakes
-    "I",   # isort
-    "B",   # flake8-bugbear
-    "C4",  # flake8-comprehensions
-    "UP",  # pyupgrade
-]
-ignore = []
+target-version = "py313"
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "B",    # flake8-bugbear
+    "C4",   # flake8-comprehensions
+    "UP",   # pyupgrade
+    "ARG",  # flake8-unused-arguments
+    "PTH",  # flake8-use-pathlib
+    "SIM",  # flake8-simplify
+    "RUF",  # Ruff-specific rules
+    "TID",  # flake8-tidy-imports
+]
+
+[tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]  # Ignore unused imports in __init__.py
 
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.13"
 strict = true
 warn_return_any = true
 warn_unused_configs = true
@@ -138,69 +138,51 @@ exclude_lines = [
 ]
 ```
 
-## Poetry Project Management
+## uv Project Management
 
-```toml
-# pyproject.toml for Poetry
-[tool.poetry]
-name = "myproject"
-version = "0.1.0"
-description = "A Python project"
-authors = ["Your Name <you@example.com>"]
-readme = "README.md"
-license = "MIT"
-packages = [{include = "myproject", from = "src"}]
-
-[tool.poetry.dependencies]
-python = "^3.11"
-requests = "^2.31.0"
-pydantic = "^2.5.0"
-
-[tool.poetry.group.dev.dependencies]
-pytest = "^7.4.0"
-pytest-cov = "^4.1.0"
-mypy = "^1.7.0"
-black = "^23.11.0"
-ruff = "^0.1.6"
-
-[tool.poetry.scripts]
-myproject = "myproject.cli:main"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-```
+`uv` is a fast Python package manager. Use it instead of pip/Poetry for dependency management.
 
 ```bash
-# Poetry commands
-poetry init                    # Initialize new project
-poetry add requests            # Add dependency
-poetry add --group dev pytest  # Add dev dependency
-poetry install                 # Install dependencies
-poetry update                  # Update dependencies
-poetry shell                   # Activate virtual environment
-poetry run pytest              # Run command in venv
-poetry build                   # Build package
-poetry publish                 # Publish to PyPI
-poetry export -f requirements.txt --output requirements.txt
+# Initialize a new project
+uv init myproject
+
+# Add dependencies
+uv add requests
+uv add pydantic
+
+# Add dev dependencies
+uv add --dev pytest pytest-cov mypy ruff
+
+# Install all dependencies (creates uv.lock)
+uv sync
+
+# Run commands in the managed environment
+uv run pytest
+uv run mypy --strict src/
+uv run ruff check src/
+uv run ruff format src/
+
+# Update dependencies
+uv lock --upgrade
+
+# Pin exact versions (uv.lock is auto-generated)
+# uv.lock should be committed to version control for applications
 ```
 
 ## Virtual Environments
 
 ```bash
-# Using venv (built-in)
+# ✅ Preferred: uv manages venvs automatically
+uv sync  # creates .venv and installs deps
+
+# Using venv (built-in fallback)
 python -m venv .venv
 source .venv/bin/activate  # Linux/Mac
-.venv\Scripts\activate     # Windows
 
 # Install in editable mode
 pip install -e .
 pip install -e ".[dev]"    # With optional dependencies
 
-# Using virtualenv
-pip install virtualenv
-virtualenv venv
-source venv/bin/activate
 
 # Using pyenv for Python version management
 pyenv install 3.11.6
@@ -273,12 +255,11 @@ pydantic>=2.5.0,<3.0.0
 pytest>=7.4.0
 pytest-cov>=4.1.0
 mypy>=1.7.0
-black>=23.11.0
 ruff>=0.1.6
 
-# Generate from Poetry
-poetry export -f requirements.txt --output requirements.txt --without-hashes
-poetry export -f requirements.txt --with dev --output requirements-dev.txt
+# Export from uv lock file
+uv export --format requirements-txt > requirements.txt
+uv export --format requirements-txt --all-groups > requirements-dev.txt
 ```
 
 ## Building and Distribution
@@ -366,22 +347,18 @@ def get_version() -> str:
 ## Dependency Management Best Practices
 
 ```python
-# Pin dependencies for applications
-requests==2.31.0
-pydantic==2.5.2
-
-# Use ranges for libraries
+# Pin dependencies for applications (uv.lock handles this automatically)
+# For libraries, use ranges:
 requests>=2.31.0,<3.0.0
 pydantic>=2.5.0,<3.0.0
+```
 
+```bash
 # Lock files
-# Poetry: poetry.lock
-# pip: requirements.txt with exact versions
-pip freeze > requirements-lock.txt
-
-# Update dependencies
-poetry update
-pip install --upgrade -r requirements.txt
+# uv: uv.lock (auto-generated, commit to VCS for applications)
+uv lock                       # Resolve and lock dependencies
+uv lock --upgrade             # Upgrade all dependencies
+uv lock --upgrade-package requests  # Upgrade single package
 ```
 
 ## CI/CD Integration
@@ -397,31 +374,29 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.11", "3.12"]
+        python-version: ["3.12", "3.13"]
 
     steps:
     - uses: actions/checkout@v4
+    - name: Install uv
+      uses: astral-sh/setup-uv@v5
+
     - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ matrix.python-version }}
+      run: uv python install ${{ matrix.python-version }}
 
     - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -e ".[dev]"
+      run: uv sync
 
     - name: Run tests
-      run: |
-        pytest --cov --cov-report=xml
+      run: uv run pytest --cov --cov-report=xml
 
     - name: Type check
-      run: mypy src
+      run: uv run mypy --strict src
 
-    - name: Lint
+    - name: Lint and format check
       run: |
-        black --check src tests
-        ruff check src tests
+        uv run ruff check src tests
+        uv run ruff format --check src tests
 
     - name: Upload coverage
       uses: codecov/codecov-action@v3
@@ -432,16 +407,12 @@ jobs:
 ```yaml
 # .pre-commit-config.yaml
 repos:
-  - repo: https://github.com/psf/black
-    rev: 23.11.0
-    hooks:
-      - id: black
-
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.1.6
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
+      - id: ruff-format
 
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.7.1

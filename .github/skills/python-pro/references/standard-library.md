@@ -355,7 +355,11 @@ if Permission.READ in user_perms:
 import logging
 from pathlib import Path
 
-# Configure logging
+# ❌ AVOID: print for operational messages
+# print(f"Processing user {user_id}")
+# print(f"Error: {e}")
+
+# ✅ USE: structured logging with appropriate levels
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -369,10 +373,12 @@ logger = logging.getLogger(__name__)
 
 # Structured logging
 def process_user(user_id: int) -> None:
-    logger.info("Processing user", extra={"user_id": user_id})
+    """Process a user by ID."""
+    logger.info("Processing user %d", user_id)
     try:
         # Process...
-        logger.debug("User data loaded", extra={"user_id": user_id})
-    except Exception as e:
-        logger.exception("Failed to process user", extra={"user_id": user_id})
+        logger.debug("User data loaded for user_id=%d", user_id)
+    except Exception:
+        logger.exception("Failed to process user %d", user_id)
+        raise
 ```

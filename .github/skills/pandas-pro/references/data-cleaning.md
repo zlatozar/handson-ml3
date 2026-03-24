@@ -164,8 +164,8 @@ df_clean = df.drop_duplicates(keep=False)
 df_clean = df.drop_duplicates(subset=['id'])
 df_clean = df.drop_duplicates(subset=['name', 'email'], keep='last')
 
-# In-place modification
-df.drop_duplicates(inplace=True)
+# Return new DataFrame (avoid inplace=True)
+df = df.drop_duplicates()
 ```
 
 ### Handling Duplicates with Aggregation

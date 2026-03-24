@@ -218,17 +218,13 @@ sorted_df = df.sort_values('department')
 sorted_df = df.iloc[df['name'].str.len().argsort()]
 ```
 
-### In-Place Sorting
+### Sorting and Resetting Index
 
 ```python
-# Modify DataFrame in place
-df.sort_values('age', inplace=True)
+# ❌ AVOID: inplace=True mutation
+# df.sort_values('age', inplace=True)
 
-# Reset index after sorting
-df.sort_values('age', inplace=True)
-df.reset_index(drop=True, inplace=True)
-
-# Or chain
+# ✅ USE: return new DataFrame with method chaining
 df = df.sort_values('age').reset_index(drop=True)
 ```
 

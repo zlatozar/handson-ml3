@@ -195,7 +195,7 @@ def query_user(conn: Connection, user_id: int) -> User:
 ```toml
 # pyproject.toml
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.13"
 strict = true
 warn_return_any = true
 warn_unused_configs = true
@@ -215,6 +215,26 @@ strict_equality = true
 [[tool.mypy.overrides]]
 module = "third_party.*"
 ignore_missing_imports = true
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "B",    # flake8-bugbear
+    "C4",   # flake8-comprehensions
+    "UP",   # pyupgrade
+    "ARG",  # flake8-unused-arguments
+    "PTH",  # flake8-use-pathlib
+    "SIM",  # flake8-simplify
+    "RUF",  # Ruff-specific rules
+    "TID",  # flake8-tidy-imports
+]
 ```
 
 ## Common Type Patterns

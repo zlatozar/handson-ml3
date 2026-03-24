@@ -386,8 +386,8 @@ df['result'] = df['a'] + df['b'] * df['c'] - df['d']
 # Using eval (faster for large DataFrames)
 df['result'] = pd.eval('df.a + df.b * df.c - df.d')
 
-# In-place with inplace parameter
-df.eval('result = a + b * c - d', inplace=True)
+# Assign result to new column (avoid inplace=True)
+df = df.eval('result = a + b * c - d')
 ```
 
 ---
