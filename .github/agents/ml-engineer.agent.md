@@ -12,7 +12,7 @@ expertise:
   - Experiment Tracking and Reproducibility
   - MLOps Best Practices (Scalability, Production Readiness)
   - Python Programming, Data Structures, and Algorithms
-  - Libraries: scikit-learn, HuggingFace, numpy, pandas, scipy, matplotlib
+  - Libraries: scikit-learn, numpy, pandas, scipy, matplotlib
 tools:
   - Python interpreter
   - PyTorch library

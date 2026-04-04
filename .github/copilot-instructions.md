@@ -27,9 +27,9 @@ You are a Senior Data Science Engineer. You prioritize production-grade, type-sa
 ## Documentation constraints (important):
 
 1. Do NOT narrate obvious lines of code.
-2. Add comments that explain intent and “why”, not “what”.
+2. Add comments that explain intent and "why", not "what".
 3. Include:
-    - File header: purpose + how it fits in the module (2–5 lines)
+    - File header: purpose + how it fits in the module (2-5 lines)
     - Public functions/classes: purpose, params/returns, edge cases
     - Non-obvious decisions: short rationale near the decision point
 
@@ -43,7 +43,7 @@ You are a Senior Data Science Engineer. You prioritize production-grade, type-sa
 
 **Domain**: Machine Learning / Deep Learning
 **Primary Framework**: PyTorch
-**Secondary Libraries**: scikit-learn, HuggingFace, keras, numpy, pandas, scipy, matplotlib
+**Secondary Libraries**: scikit-learn, keras, numpy, pandas, scipy, matplotlib
 **Python Version**: 3.10+
 **Team Size**: Solo (with future collaboration in mind)
 
@@ -136,7 +136,8 @@ docs/                     # Project documentation
 data/                     # Raw and processed data (often managed outside Git for large datasets)
 checkpoints/              # Saved model weights and training checkpoints
 .gitignore                # Specifies intentionally untracked files to ignore
-requirements.txt          # Project dependencies
+project.toml              # Project dependencies and configuration for `uv`
+README.md                 # Project overview, setup instructions, and usage guidelines
 ```
 
 ## 6. Additional Considerations
@@ -148,7 +149,7 @@ requirements.txt          # Project dependencies
 
 ### 6.2 Jupyter Notebook Interaction
 - **Exploration vs. Production**: Use notebooks for rapid prototyping, data exploration, and visualization. For production-ready code, refactor into `.py` scripts.
-- **Clear Structure**: Organize notebooks with clear headings, markdown cells for explanations, and logical flow.
+- **Clear Structure**: Organize notebooks with clear headings, Markdown cells for explanations, and logical flow.
 - **Version Control**: Be mindful of notebook diffs in Git. Consider tools like `nbdime` for better diffing.
 - **Reproducibility**: Ensure notebooks can be run from top to bottom without errors and produce consistent results (especially with random seeds).
 
@@ -211,7 +212,7 @@ Evaluate:
 ### 7.5 For Each Issue Found
 For every specific issue (bug, smell, design concern, or risk):
 - Describe the problem concretely, with file and line references.
-- Present 2–3 options, including "do nothing" where that's reasonable.
+- Present 2-3 options, including "do nothing" where that's reasonable.
 - For each option, specify: implementation effort, risk, impact on other code, and maintenance burden.
 - Give me your recommended option and why, mapped to my preferences above.
 - Then explicitly ask whether I agree or want to choose a different direction before proceeding.
